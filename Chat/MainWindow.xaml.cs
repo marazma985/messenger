@@ -33,9 +33,9 @@ namespace Chat
            
             Typeface myTypeface = new Typeface("Arial");
             FormattedText ft = new FormattedText(text, CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight, myTypeface, 16, Brushes.Red);
+                    FlowDirection.LeftToRight, myTypeface, 24, Brushes.Red);
             
-            double[] array = { ft.Width + 180, ft.Height };
+            double[] array = { ft.Width, ft.Height };
             return array;
         }
 
@@ -43,28 +43,27 @@ namespace Chat
         {
             DateTime datetimenow = DateTime.Now;
             string username = App.Current.Properties["username"].ToString();
-            string message = MessageInput.Text;
-            if (string.IsNullOrEmpty(message))
+            string message = MessageInput.Text.Trim();
+            if (string.IsNullOrEmpty(message)) {
+                MessageInput.Text = string.Empty;
                 return;
+            }
+                
 
-            //Message.Text = message;
+            message = $"{username}: {message}    {datetimenow}";
 
 
             TextBlock block = new TextBlock();
             block.Background = Brushes.Aqua;
+            block.FontSize = 20;
             block.Height = CalculateSizeText(message)[1];
             block.HorizontalAlignment = HorizontalAlignment.Left;
             block.Margin = new Thickness(0, 10, 0, 0);
 
             
-
-
-
-
-            block.Text = $"{username}: {message}    {datetimenow}";
-            GridMessage.Children.Add(block);
+            block.Text = message;
+            StackPanelMessage.Children.Insert(0, block);
             
-
 
 
             MessageInput.Text = string.Empty;

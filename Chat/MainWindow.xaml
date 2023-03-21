@@ -6,14 +6,34 @@
         xmlns:local="clr-namespace:Chat"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Name="Grid">
-        <TextBlock FontSize="20" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Name="Start" Text="" VerticalAlignment="Top" Height="34" Width="576"/>
-        <TextBox Name="MessageInput" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Текст" VerticalAlignment="Top" Width="432" Height="40"/>
-        <Button Content="Отправить" Name="SendMessage" HorizontalAlignment="Left" Margin="554,10,0,0" VerticalAlignment="Top" Height="40" Width="62" Click="SendMessage_Click" IsDefault="True"/>
-       
-            <StackPanel  Margin="-2,64,-2,-68" Name="GridMessage" CanVerticallyScroll="True" Width="500" Height="500">
+    <Grid Name="Grid" >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-            </StackPanel>
-       
+        <TextBlock Margin="0,15" Name="Start" Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="1" FontSize="20" Text="dsfsdfsdf" TextAlignment="Center"></TextBlock>
+        
+        <TextBox Margin="0,15" Name="MessageInput" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" FontSize="20" Text="Neverland"/>
+        <Button Content="Отправить" Name="SendMessage" Click="SendMessage_Click" IsDefault="True" Grid.Row="1" Grid.Column="4" Margin="0,15"></Button>
+        <Grid  Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="4">
+            <ScrollViewer>
+                <StackPanel Name="StackPanelMessage" CanVerticallyScroll="True" />
+            </ScrollViewer> 
+        </Grid>
+        
     </Grid>
 </Window>

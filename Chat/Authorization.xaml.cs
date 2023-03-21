@@ -23,33 +23,38 @@ namespace Chat
         public Authorization()
         {
             InitializeComponent();
+
             string file = @"D:\Nickname.txt";
-            if (!(File.Exists(@"D:\Nickname.txt")))
-            {
-                
 
-            }
-            else
-            {
-                string nick = File.ReadAllText(file);
+            //проверка есть ли файл
+            if (!(File.Exists(file)))
+                return;
 
-            }
+            string username = File.ReadAllText(file);
+
+            //проверка не пустой ли файл
+            if (string.IsNullOrWhiteSpace(username))
+                return;
+
+            Auth(username);
         }
 
-       
+        //Метод авторизации принимает ник и записывает его в глобальную переменную и в файл
+        private void Auth(string username) {
+            App.Current.Properties["username"] = username;
+            System.IO.File.WriteAllText(@"D:\Nickname.txt", username);
+            Window Main = new MainWindow();
+            (Main as MainWindow).Start.Text = $"Вы вошли в чат {username}";
+
+            Main.Show();
+            Close();
+        }
 
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
             string username = Nickname.Text;
-            App.Current.Properties["username"] = username;
-            System.IO.File.WriteAllText(@"D:\Nickname.txt", username);
-            Window Main = new MainWindow();
-            (Main as MainWindow).Start.Text = $"Вы вошли в чат {username}";
-       
-            Main.Show();
-            Close();
-            
+            Auth(username);
         }
     }
 }
